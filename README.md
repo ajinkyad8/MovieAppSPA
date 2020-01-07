@@ -13,6 +13,8 @@ The code behind the <b>.NET Core 2.2</b> server running the application can be f
 ### 1) Copy and Run the .NET Core Server
 Follow the steps 1-7 from <a href="https://github.com/ajinkyad8/MovieAppAPI/blob/master/README.md">here</a>. This will be running the backend server for the application.
 
+<i>The API also has seperate requirements. Make sure you go through them and make the necessary downloads to ensure the server is running properly.</i>
+
 ### 2) Copy the Angular Application.
 Using the same step that you used to copy the .NET Core server copy the angular application.
 
@@ -54,6 +56,7 @@ Details about the application can be found back <a href="https://github.com/ajin
 
 
 <b>**Note</b>
+
 Since the built files of this project are already present in the API code you can access the app from <i>localhost:5000</i> on your browser as well, which is the port where the .NET Core server is running.
 
 However, if you make any changes to the Angular code they won't be reflected there and will only be observed on <i>localhost:4200</i>.
