@@ -1,0 +1,20 @@
+<div class="card mb-3" style="max-width: 540px; cursor: pointer;"  [routerLink]="['/artist/detail']" [queryParams] ="{id: artist?.id}">
+    <div class="row no-gutters">
+      <div class="col-md-4" >
+        <img src="{{artist.photoUrl || '../../../assets/artist.png'}}" class="card-img-top" alt="..."
+        [ngClass]="!artist.isApproved && 'pending-approval'">
+        <div class="text-center img-text" *ngIf="!artist.isApproved">
+          <h6 class="text-danger">Not Yet Approved</h6>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{artist.firstName}} {{artist.lastName}}</h5>
+          <p class="card-text">{{artist.gender}} <br>
+            <ng-container *ngIf="artist.knownAs"> Known as {{artist.knownAs}}</ng-container>
+          </p>
+          <p class="card-text"><small class="text-muted">{{artist.dateOfBirth| date:"dd/MM/yyyy"}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>

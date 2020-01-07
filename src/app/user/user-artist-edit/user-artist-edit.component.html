@@ -1,0 +1,43 @@
+<div class="container mt-2" *ngFor="let artist of artistActivity; let i = index">
+  <ng-container *ngIf="artist.savedArtist?.isApproved">
+    <h4 >{{artist.savedArtist.firstName}} {{artist.savedArtist.lastName}}</h4>
+    <table class="table" style="border: 1px; border-style: solid; border-color: grey;">
+        <tr>
+          <th>Changes</th>
+          <th *ngIf="!artist.isApproved">Current</th>
+          <th>Edited</th>
+        </tr>
+          <tr *ngIf="artist.firstName">
+              <th>First Name</th>
+              <td *ngIf="!artist.isApproved">{{artist.savedArtist?.firstName}}</td>
+              <td>{{artist.firstName}}</td>
+          </tr>
+          <tr *ngIf="artist.lastName">
+              <th>Last Name</th>
+              <td *ngIf="!artist.isApproved">{{artist.savedArtist?.lastName}}</td>
+              <td>{{artist.lastName}}</td>
+          </tr>
+          <tr *ngIf="artist.knownAs">
+              <th>Known As</th>
+              <td *ngIf="!artist.isApproved">{{artist.savedArtist?.knownAs}}</td>
+              <td>{{artist.knownAs}}</td>
+          </tr>
+          <tr *ngIf="artist.dateOfBirth">
+              <th>Date Of Birth</th>
+              <td *ngIf="!artist.isApproved">{{artist.savedArtist?.dateOfBirth | date:"dd,MMM,yyyy"}}</td>
+              <td>{{artist.dateOfBirth | date:"dd,MMM,yyyy"}}</td>
+          </tr>
+          <tr *ngIf="artist.gender">
+              <th>Gender</th>
+              <td *ngIf="!artist.isApproved">{{artist.savedArtist?.gender}}</td>
+              <td>{{artist.gender}}</td>
+          </tr>
+            <tr>
+              <td *ngIf="!artist.isApproved" ><button class="btn btn-danger" (click)="delete(artist.id, i)">Delete</button></td>
+            </tr>
+      </table>
+      </ng-container>
+  </div>
+  <div class="container mt-2" *ngIf="artistActivity?.length===0">
+    <h1>You don't have any edits here.</h1>
+  </div>

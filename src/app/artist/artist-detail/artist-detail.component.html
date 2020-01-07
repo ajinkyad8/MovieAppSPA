@@ -1,0 +1,123 @@
+<div class="row mt-2 p-2" style="display: flex;">
+    <div class="tab-panel col-sm-9" style="border: 1px solid; border-color: darkgray; flex: 1;">
+      <tabset>
+          <tab heading="Artist Details">
+            <div class="container">
+    <table class="table mt-2">
+        <tbody>
+            <tr>
+              <th>First Name</th>
+                <td>{{artist?.firstName}}</td>
+            </tr>
+            <tr>
+              <th>Last Name</th>
+                <td>{{artist?.lastName}}</td>
+            </tr>
+            <tr>
+              <th>Known As</th>
+                <td>{{artist?.knownAs}}</td>
+            </tr>
+            <tr>
+              <th>Date of Birth</th>
+                <td>{{artist?.dateOfBirth| date:"dd,MMM,yyyy"}}</td>
+            </tr>
+            <tr>
+            <th>Gender</th>
+              <td>{{artist?.gender}}</td>
+          </tr>
+        </tbody>
+    </table>
+    <div class="btn-group">
+      <button class="btn btn-info" (click)="openActivityLog(activity)">Edit History <i class="fa fa-history"></i></button>
+    </div>
+</div>
+<div class="container" *ngIf="seperatedMovieRoles.length>0">
+  <div *ngFor="let movieRole of seperatedMovieRoles">
+    <div *ngIf="movieRole.movieRoles.length>0">
+    <app-artist-card-deck [roleType]="movieRole.roleType" [movieRoles]="movieRole.movieRoles"></app-artist-card-deck>
+  </div>
+  </div>
+</div>
+</tab>
+<tab heading="Artist Photos">
+  <div *ngIf="artist">
+    <carousel [itemsPerSlide]="3" class="mx-auto" *ngIf="artist.artistPhotos.length>0">
+      <slide *ngFor="let artistPhoto of artist.artistPhotos; " style="margin-left: auto !important;
+      margin-right: auto !important;">
+      <img [src]="artistPhoto?.photo.url" alt="" style="display: block; width: 100%;"
+      [ngClass]="!artistPhoto.photo.isApproved && 'pending-approval'">
+              <div class="text-center img-text" *ngIf="!artistPhoto.photo.isApproved">
+                <h4 class="text-danger">Not Yet Approved</h4>
+              </div>
+      </slide>
+      </carousel>
+  </div>
+</tab>
+</tabset>
+
+</div>
+<div class="col-sm-3 p-2" style="border: 1px solid; border-color: darkgray;">
+<h4 *ngIf="artist">{{artist.firstName}} {{artist.lastName}}</h4>
+<img src="{{artist?.photoUrl || '../../../../../assets/artist.png'}}" alt="" style="display: block; width: 100%;">
+<div class="btn-group mt-2" *ngIf="artist">
+  <button class="btn btn-warning"  [routerLink]="['/artist/edit']" [queryParams]="{id: artist.id}">Edit Artist</button>
+</div>
+</div>
+</div>
+
+<ng-template #activity>
+<div class="modal-header"><h5>{{artist.firstName}} {{artist.lastName}}</h5>
+  <button type="button" class="close pull-right"(click)="modalRef.hide()"><i class="fa fa-close"></i>
+  </button></div>
+  <div class="modal-body"style="overflow-y: auto; height: 600px;">
+    <div class="container mt-2">
+    <h5 >{{firstActivity.userName}} Added <span class="pull-right"> {{firstActivity.timeStamp| date: 'dd,MMM,yyyy HH:mm'}}</span></h5>
+    <table class="table" style="border: 1px; border-style: solid; border-color: grey;">
+          <tr *ngIf="firstActivity.firstName">
+              <th>First Name</th>
+              <td>{{firstActivity.firstName}}</td>
+          </tr>
+          <tr *ngIf="firstActivity.lastName">
+              <th>Last Name</th>
+              <td>{{firstActivity.lastName}}</td>
+          </tr>
+          <tr *ngIf="firstActivity.knownAs">
+              <th>Known As</th>
+              <td>{{firstActivity.knownAs}}</td>
+          </tr>
+          <tr *ngIf="firstActivity.dateOfBirth">
+              <th>Date Of Birth</th>
+              <td>{{firstActivity.dateOfBirth | date:"dd,MMM,yyyy"}}</td>
+          </tr>
+          <tr *ngIf="firstActivity.gender">
+              <th>Gender</th>
+              <td>{{firstActivity.gender}}</td>
+          </tr>
+      </table>
+  <div  *ngFor="let activity of artistActivity; let i = index">
+      <h5 >{{activity.userName}} Edited <span class="pull-right"> {{activity.timeStamp| date: 'dd,MMM,yyyy HH:mm'}}</span></h5>
+      <table class="table" style="border: 1px; border-style: solid; border-color: grey;">
+            <tr *ngIf="activity.firstName">
+                <th>First Name</th>
+                <td>{{activity.firstName}}</td>
+            </tr>
+            <tr *ngIf="activity.lastName">
+                <th>Last Name</th>
+                <td>{{activity.lastName}}</td>
+            </tr>
+            <tr *ngIf="activity.knownAs">
+                <th>Known As</th>
+                <td>{{activity.knownAs}}</td>
+            </tr>
+            <tr *ngIf="activity.dateOfBirth">
+                <th>Date Of Birth</th>
+                <td>{{activity.dateOfBirth | date:"dd,MMM,yyyy"}}</td>
+            </tr>
+            <tr *ngIf="activity.gender">
+                <th>Gender</th>
+                <td>{{activity.gender}}</td>
+            </tr>
+        </table>
+    </div>
+  </div></div>
+</ng-template>

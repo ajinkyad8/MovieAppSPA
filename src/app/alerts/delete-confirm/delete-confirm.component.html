@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left"> {{message}}</h4>
+</div>
+<div class="container">
+  <ng-container *ngIf="!skipReason">
+  <label>Reason</label>
+    <input type="text" class="form-control" [(ngModel)]="deleteReason" minlength="20" name="reason">
+    <span *ngIf="20 > deleteReason?.length" class="text-danger">Minimum 20 characters required.</span>
+    </ng-container>
+      <div class="modal-footer">
+    <button class="btn btn-primary" [disabled]="(20 > deleteReason?.length && !skipReason)|| (!deleteReason && !skipReason)" (click)="confirm()">
+      <span *ngIf="!skipReason">Submit</span>
+      <span *ngIf="skipReason">Yes</span></button>
+    <button class="btn btn-secondary" (click)="cancel()">Cancel</button>
+      </div>
+  </div>

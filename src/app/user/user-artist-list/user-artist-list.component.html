@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="btn-group mt-4" style="align-content: center;">
+        <button class="btn btn-primary btn-lg" [routerLink]="['/artist/edit']">Add</button>
+</div>
+<div class="row mt-5 justify-content-center">
+  <div *ngFor="let artist of artists; let i = index;">
+    <div class="card mb-3" style="max-width: 540px; cursor: pointer;" [routerLink]="['/artist/detail']" [queryParams] ="{id: artist?.id}">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{artist.photoUrl || '../../../assets/artist.png'}}" class="card-img-top" alt="..."
+        [ngClass]="!artist.isApproved && 'pending-approval'">
+        <div class="text-center img-text" *ngIf="!artist.isApproved">
+          <h6 class="text-danger">Not Yet Approved</h6>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{artist.firstName}} {{artist.lastName}}</h5>
+          <p class="card-text">{{artist.gender}}
+          </p>
+          <p class="card-text"><small class="text-muted">{{artist.dateOfBirth| date:"dd/MM/yyyy"}}</small></p>
+          <button class="btn btn-danger" *ngIf="!artist.isApproved" (click)="delete(artist.id,i)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<div class="container mt-2" *ngIf="artists?.length===0">
+  <h1>You don't have any additions here.</h1>
+</div>

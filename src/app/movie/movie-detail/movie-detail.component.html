@@ -1,0 +1,151 @@
+<div class="row mt-2 p-2" style="display: flex;">
+  <div class="tab-panel col-sm-9" style="border: 1px solid; border-color: darkgray; flex: 1;">
+    <tabset>
+      <tab heading="Movie Details">
+        <div class="container">
+          <div class="container">
+            <table class="table mt-2">
+              <tbody>
+                <tr>
+                  <th>Title</th>
+                  <td>{{movie?.name}}</td>
+                </tr>
+                <tr>
+                  <th>Plot Summary</th>
+                  <td>{{movie?.plotSummary}}</td>
+                </tr>
+                <tr>
+                  <th>Release Date</th>
+                  <td>{{movie?.releaseDate| date:"dd,MMM,yyyy"}}</td>
+                </tr>
+                <tr>
+                  <th>Language</th>
+                  <td>{{movie?.language}}</td>
+                </tr>
+                <tr>
+                  <th>Genre</th>
+                  <td>{{movie?.genre}}</td>
+                </tr>
+                <tr>
+                  <th>Runtime</th>
+                  <td>{{movie?.runtime}} mins</td>
+                </tr>
+                <tr>
+                  <th>Country</th>
+                  <td>{{movie?.country}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="btn-group">
+              <button class="btn btn-info" (click)="openActivityLog(activity)">Edit History <i class="fa fa-history"></i></button>
+            </div>
+          </div>
+
+          <div class="container" *ngIf="seperatedMovieRoles.length>0">
+            <div *ngFor="let movieRole of seperatedMovieRoles">
+              <app-movie-detail-card-deck [roleType]="movieRole.roleType" [movieRoles]="movieRole.movieRoles">
+              </app-movie-detail-card-deck>
+            </div>
+          </div>
+        </div>
+      </tab>
+      <tab heading="Movie Photos">
+        <div *ngIf="movie">
+          <carousel [itemsPerSlide]="3" class="mx-auto" *ngIf="movie.moviePhotos.length>0">
+            <slide *ngFor="let moviePhoto of movie.moviePhotos; "
+             style="margin-left: auto !important;margin-right: auto !important;">
+              <img [src]="moviePhoto.photo.url" alt="" style="display: block; width: 100%;" 
+              [ngClass]="!moviePhoto.photo.isApproved && 'pending-approval'">
+              <div class="text-center img-text" *ngIf="!moviePhoto.photo.isApproved">
+                <h4 class="text-danger">Not Yet Approved</h4>
+              </div>
+            </slide>
+          </carousel>
+        </div>
+      </tab>
+    </tabset>
+
+  </div>
+  <div class="col-sm-3 p-2" style="border: 1px solid; border-color: darkgray;">
+    <h4 *ngIf="movie">{{movie.name}}</h4>
+    <img src="{{movie?.photoUrl || '../../../../../assets/movie.png'}}" alt="" style="display: block; width: 100%;">
+    <div class="btn-group mt-2" *ngIf="movie">
+      <button class="btn btn-warning" [routerLink]="['/movie/edit']" 
+      [queryParams]="{id: movie.id}">Edit Movie</button></div>
+  </div>
+</div>
+
+
+<ng-template #activity>
+  <div class="modal-header"><h5>{{movie.name}}</h5>
+    <button type="button" class="close pull-right"(click)="modalRef.hide()"><i class="fa fa-close"></i>
+    </button></div>
+    <div class="modal-body"style="overflow-y: auto; height: 600px;">
+      <div class="container mt-2">
+      <h5 >{{firstActivity.userName}} Added <span class="pull-right"> {{firstActivity.timeStamp| date: 'dd,MMM,yyyy HH:mm'}}</span></h5>
+      <table class="table" style="border: 1px; border-style: solid; border-color: grey;">
+        <tr>
+          <th>Title</th>
+          <td>{{firstActivity?.name}}</td>
+        </tr>
+        <tr>
+          <th>Plot Summary</th>
+          <td>{{firstActivity?.plotSummary}}</td>
+        </tr>
+        <tr>
+          <th>Release Date</th>
+          <td>{{firstActivity?.releaseDate| date:"dd,MMM,yyyy"}}</td>
+        </tr>
+        <tr>
+          <th>Language</th>
+          <td>{{firstActivity?.language}}</td>
+        </tr>
+        <tr>
+          <th>Genre</th>
+          <td>{{firstActivity?.genre}}</td>
+        </tr>
+        <tr>
+          <th>Runtime</th>
+          <td>{{firstActivity?.runtime}} mins</td>
+        </tr>
+        <tr>
+          <th>Country</th>
+          <td>{{firstActivity?.country}}</td>
+        </tr>
+        </table>
+    <div  *ngFor="let activity of movieActivity">
+        <h5 >{{activity.userName}} Edited <span class="pull-right"> {{activity.timeStamp| date: 'dd,MMM,yyyy HH:mm'}}</span></h5>
+        <table class="table" style="border: 1px; border-style: solid; border-color: grey;">
+              
+        <tr *ngIf="activity.name">
+          <th>Title</th>
+          <td>{{activity?.name}}</td>
+        </tr>
+        <tr  *ngIf="activity.plotSummary">
+          <th>Plot Summary</th>
+          <td>{{activity?.plotSummary}}</td>
+        </tr>
+        <tr  *ngIf="activity.releaseDate">
+          <th>Release Date</th>
+          <td>{{activity?.releaseDate| date:"dd,MMM,yyyy"}}</td>
+        </tr>
+        <tr  *ngIf="activity.language">
+          <th>Language</th>
+          <td>{{activity?.language}}</td>
+        </tr>
+        <tr  *ngIf="activity.genre">
+          <th>Genre</th>
+          <td>{{activity?.genre}}</td>
+        </tr>
+        <tr  *ngIf="activity.runtime">
+          <th>Runtime</th>
+          <td>{{activity?.runtime}} mins</td>
+        </tr>
+        <tr  *ngIf="activity.country">
+          <th>Country</th>
+          <td>{{activity?.country}}</td>
+        </tr>
+          </table>
+      </div>
+    </div></div>
+  </ng-template>

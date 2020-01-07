@@ -1,0 +1,81 @@
+.card-deck.card-deck-scroll {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    border: 2px;
+    padding: 20px;
+    border-style: solid;
+}
+
+.card-deck.card-deck-scroll > .card {
+    flex-basis: 35%;
+}
+
+.card {
+    max-height: 150px;
+    max-width: 150px;
+    padding: 1rem;
+}
+
+.card:hover img{
+    transform: scale(1.2, 1.2);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+    opacity: 0.7;
+}
+
+.card img{
+    transform: scale(1.0, 1.0);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;    
+}
+
+.card-img-wrapper {
+    position: relative;
+}
+
+.member-icons {
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+}
+
+.card-img-wrapper:hover .member-icons {
+    bottom: 0;
+    opacity: 1;
+}
+
+.animate {
+    transition: all 0.3s ease-in-out
+}
+.pending-approval{
+    opacity: 0.2;
+  }
+  
+  
+  .img-text {
+    position: absolute;
+    bottom: 30%;
+    left: 5%;
+  }
+  
+.longText {
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.longText:hover{
+    overflow: visible; 
+    white-space: normal; 
+    width: auto;
+    position: absolute;
+    background-color:#FFF;
+}
+.longText:hover+div {
+    margin-top:20px;
+}

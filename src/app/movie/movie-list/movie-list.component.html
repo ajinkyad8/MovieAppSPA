@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="btn-group mt-4 col-2" style="align-content: center;">
+      <button class="btn btn-primary" [routerLink]="['/movie/edit']">Add</button>
+    </div>
+    <div class="col-4 mt-4">
+      <input type="text" class="form-control" name="search" [(ngModel)]="search" placeholder="Search"
+        (ngModelChange)="getMovies()">
+    </div><div class="col-3 mt-4">
+        <div class="form-inline">
+        <div class="form-group">
+          <label for="sortBy" style="text-align: left;">Sort By:</label>
+        <select name="sortBy" id ="sortBy" class="form-control ml-2" [(ngModel)]="sortBy" (change)="getMovies()">
+          <option [value]="option.value" *ngFor="let option of sortingOptions">{{option.display}}</option>
+        </select>
+        </div>
+        </div>
+      </div>
+      <div class="col-3 mt-4">
+        <div class="btn-group">
+          <button class="btn btn-primary" (click)="getAscending()" [disabled]="!descending">Ascending</button>
+          <button class="btn btn-secondary" (click)="getDescending()" [disabled]="descending">Descending</button>
+        </div>
+      </div>
+  </div>
+
+  <div class="row mt-5 justify-content-center">
+    <div class="mx-2 mb-3" *ngFor="let movie of movies">
+      <app-movie-card [movie]="movie"></app-movie-card>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <pagination [boundaryLinks]="true" [(ngModel)]="pageNumber" [totalItems]="totalItems" [itemsPerPage]="pageSize"
+    (pageChanged)="pageChanged($event)"></pagination>
+</div>

@@ -1,0 +1,95 @@
+<div class="row mt-2 p-2" style="display: flex;">
+    <div class="tab-panel col-sm-9" style="border: 1px solid; border-color: darkgray; flex: 1;">
+     <tabset>
+  <tab heading="Edit Movie">
+    <div class="container mt-2" style="width: 800px;">
+      <form [formGroup]="movieForm" (submit)="save()">    
+        <div class="form-group">
+          <input type="text" [ngClass]="{'is-invalid':movieForm.get('name').errors && movieForm.get('name').touched
+            }" class="form-control" formControlName="name" placeholder="Title" />
+          <div class="invalid-feedback">
+            Please enter the movie title.
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" [ngClass]="{ 'is-invalid':movieForm.get('language').errors && movieForm.get('language').touched }"
+           class="form-control" formControlName="language" placeholder="Language" />
+          <div class="invalid-feedback">
+            Please enter a language.
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" [ngClass]="{ 'is-invalid':movieForm.get('genre').errors && movieForm.get('genre').touched }"
+           class="form-control" formControlName="genre" placeholder="Genre" />
+          <div class="invalid-feedback">
+            Please enter a genre.
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea rows="6" class="form-control" [ngClass]="{
+              'is-invalid':
+                movieForm.get('plotSummary').errors &&
+                movieForm.get('plotSummary').touched
+            }" formControlName="plotSummary" placeholder="Plot Summary"></textarea>
+          <div class="invalid-feedback">
+            Please write a brief summary of the plot.
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" bsDatepicker [bsConfig]="{ containerClass: 'theme-dark-blue' }" [ngClass]="{
+              'is-invalid':
+                movieForm.get('releaseDate').errors &&
+                movieForm.get('releaseDate').touched
+            }" class="form-control" formControlName="releaseDate" placeholder="Release Date" />
+          <div class="invalid-feedback">
+            The release date is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="number" class="form-control" [ngClass]="{
+              'is-invalid':
+                movieForm.get('runtime').errors && movieForm.get('runtime').touched
+            }" formControlName="runtime" placeholder="Runtime" />
+          <div class="invalid-feedback">
+            Please enter the runtime.
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" [ngClass]="{
+              'is-invalid':
+                movieForm.get('country').errors && movieForm.get('country').touched
+            }" formControlName="country" placeholder="Country" />
+          <div class="invalid-feedback">
+            Please enter the country.
+          </div>
+        </div>
+        <div class="form-group text-center">
+          <button class="btn btn-success" type="submit" [disabled]="!movieForm.valid || !movieForm.dirty">Save</button>
+          <button class="btn btn-default" type="button" [routerLink]="['/movie']">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="container">
+      <div *ngFor="let movieRole of seperatedMovieRoles" style="width: 800px;" class="container">
+        <app-movie-edit-card-deck [roleType]="movieRole.roleType" [movieRoles]="movieRole.artists" [movie]="movie">
+        </app-movie-edit-card-deck>
+      </div>
+    </div>
+  </tab>
+  <tab heading="Edit Photos" *ngIf="movie">
+    <div>
+      <app-movie-edit-photo [moviePhotos]="movie.moviePhotos" [id]="movie.id" (url)="changeDisplayPicture($event)"></app-movie-edit-photo>
+    </div>
+  </tab>
+</tabset>
+</div>
+<div class="col-sm-3 p-2" style="border: 1px solid; border-color: darkgray;">
+  <h4 *ngIf="movie">{{movie.name}}</h4>
+  <h4 *ngIf="!movie">New Movie</h4>
+  <img src="{{movie?.photoUrl || '../../../../../assets/movie.png'}}" alt="" style="display: block; width: 100%;">
+  <div class="btn-group mt-2" *ngIf="movie">
+      <button class="btn btn-danger" (click)="deleteMovie()">Delete Movie</button></div>
+</div>
+</div>

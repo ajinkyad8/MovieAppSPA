@@ -1,0 +1,38 @@
+<div class="row mt-2">
+    <div class="col-sm-4 " style="border: lightgray 1px solid;" *ngFor="let photo of photosWithDeleteRequests; let i = index">
+      <img src="{{photo.photo.url}}" class="img-fluid">
+      <a *ngIf="photo.movie" [routerLink]="['/movie/detail']"  [queryParams] ="{id: photo.movie?.id}"><h3>{{photo.movie.name}}</h3></a>
+      <a *ngIf="photo.artist"  [routerLink]="['/artist/detail']"  [queryParams] ="{id: photo.artist?.id}">
+       <h3>{{photo.artist.firstName}} {{photo.artist.lastName}}</h3></a>
+      <div class="btn-group">
+          <button class="btn btn-info" (click)="viewRequests(photo.photoId,requestModal,i)">
+            View Delete Requests<i class="fa fa-angle-double-up"></i></button>
+        </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-2" *ngIf="photosWithDeleteRequests?.length===0">
+    <h1 >Nothing to review at the moment.</h1>
+  </div>
+
+  <ng-template #requestModal>
+      <div class="modal-header">    <h4 class="modal-title pull-left">Requests</h4>
+        <button type="button" class="close pull-right" (click)="modalRef.hide()"><i class="fa fa-close fa-2X"></i>
+        </button>
+      </div>
+      <div class="modal-body container">
+        <table class="table">
+        <tr>
+          <th>User</th>
+          <th>Reason</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let request of requests; let i = index">
+          <td>{{request?.user.userName}}</td>
+          <td>{{request.reason}}</td>
+          <td><div class="btn-group">
+            <button class="btn btn-danger" (click)="review(request.id,true,i)">Accpet</button>
+            <button class="btn btn-primary"(click)="review(request.id,false,i)">Reject</button>
+          </div></td>
+        </tr></table>
+      </div>
+    </ng-template>

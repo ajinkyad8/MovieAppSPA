@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-sm-4 " style="border: lightgray 1px solid;" *ngFor="let artistPhoto of artistPhotos; let i = index">
+      <img src="{{artistPhoto.photo.url}}" class="img-fluid">
+      <h3>{{artistPhoto.artistName}}</h3>
+      <div class="btn-group">
+          <button class="btn btn-danger" *ngIf="!artistPhoto.photo.isApproved">Delete</button>
+        </div>
+    </div>
+  </div>
+  <div class="container mt-2" *ngIf="artistPhotos?.length===0">
+    <h1>You don't have any additions here.</h1>
+  </div>

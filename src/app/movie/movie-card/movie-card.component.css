@@ -1,0 +1,10 @@
+.pending-approval{
+    opacity: 0.2;
+  }
+  
+  
+  .img-text {
+    position: absolute;
+    bottom: 30%;
+    left: 15%;
+  }

@@ -1,0 +1,64 @@
+<div class="container justify-content-center mt-4">
+<h1>Welcome to Movie Zone</h1>
+<p class="lead">Here you will find entries regarding the most popular movies and all the artists associated with those movies.
+  <br>
+  Artists include but are not limited to actors, writers, directors, etc.
+  <br> If you feel that there are movies or artists that should be here but are not present then you can add your own entries.
+  You need to be registered to make additions. Registered users can also make changes to existing entries should they find it necessary.
+</p>
+
+<h4 class="mt-3">Recently Added Movies</h4>
+<div class="row mx-2">
+<div *ngFor="let movie of movies">
+  <div class="card mx-2" style="max-width: 500px; cursor: pointer;" [routerLink]="['/movie/detail']" [queryParams]="{id: movie.id}">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{movie.photoUrl||'../../../assets/movie.png'}}" class="card-img-top" alt="..."
+        [ngClass]="!movie.isApproved && 'pending-approval'">
+        <div class="text-center img-text" *ngIf="!movie.isApproved">
+          <h6 class="text-danger">Not Yet Approved</h6>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{movie.name}}</h5>
+          <p class="card-text">{{movie.language}} <br>
+          </p>
+          <p class="card-text"><small class="text-muted">{{movie.releaseDate| date:"MMM/yyyy"}}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<h4 class="mt-3">Recently Added Artists</h4>
+<div class="row mx-2">
+  <div *ngFor="let artist of artists">
+    <div class="card mx-2" style="max-width: 500px; cursor: pointer;" [routerLink]="['/artist/detail']" [queryParams]="{id: artist.id}">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{{artist.photoUrl||'../../../assets/artist.png'}}" class="card-img-top" alt="..."
+          [ngClass]="!artist.isApproved && 'pending-approval'">
+          <div class="text-center img-text" *ngIf="!artist.isApproved">
+            <h6 class="text-danger">Not Yet Approved</h6>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+          
+        <div class="card-body">
+          <h5 class="card-title">{{artist.firstName}} {{artist.lastName}}</h5>
+          <p class="card-text">{{artist.gender}} <br>
+            <ng-container *ngIf="artist.knownAs"> Known as {{artist.knownAs}}</ng-container>
+          </p>
+          <p class="card-text"><small class="text-muted">{{artist.dateOfBirth| date:"dd/MM/yyyy"}}</small></p>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+

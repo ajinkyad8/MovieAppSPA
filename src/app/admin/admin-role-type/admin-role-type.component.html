@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-2 mt-2">
+    <button class="btn btn-primary" (click)="addRoleType(roleTypeModal)">Add</button>
+  </div>
+</div>
+<table class="table">
+  <tr>
+    <th>Role ID</th>
+    <th>Role Name</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let role of roleTypes">
+    <td>{{role.id}}</td>
+    <td>{{role.roleName}}</td>
+    <td class="btn-group"><button class="btn btn-info" (click)="editRoleType(role,roleTypeModal)">Edit</button>
+      <button type="button" class="btn btn-danger" (click)="deleteRole(role)">Delete</button></td>
+  </tr>
+</table>
+
+<ng-template #roleTypeModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+  </div>
+  <div class="modal-body">
+    <label for="roleName">Role Name</label>
+    <input type="text" class="form-control" name="roleName" [(ngModel)]="role.roleName">
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="save()" form="rolesForm">Submit</button></div>
+</ng-template>

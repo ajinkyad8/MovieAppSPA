@@ -1,0 +1,29 @@
+
+<div
+class="container mt-3 justify-content-center"
+style="border: 2px; border-color: black;"
+>
+<h4>{{roleType.roleName}}(s)</h4>
+<div class=" card-deck card-deck-scroll" style="height: 300px;">
+  <div class="card" *ngIf="movieRoles.length==0">
+    <div class="card-body justify-content-center">
+          <strong class="card-title">None</strong>
+          <br>
+  </div>
+  </div>
+    <div class="card" style="cursor: pointer;" *ngFor="let movieRole of movieRoles"
+    [routerLink]="['/artist/detail']" [queryParams] ="{id: movieRole.artist?.id}">
+      <img src="{{movieRole?.artist.photoUrl || '../../../assets/artist.png'}}" class="card-img-top" alt="..." 
+      [ngClass]="!movieRole.isApproved && 'pending-approval'">
+      <div class="text-center img-text" *ngIf="!movieRole.isApproved">
+        <h6 class="text-danger">Not Yet Approved</h6>
+      </div>
+          <div class="card-body" style="width: max-content; padding-left: 0%;">
+            <div class="longText">
+            <strong class="card-title">{{ movieRole.artist.firstName }}</strong> <br> <strong>{{ movieRole.artist.lastName }}</strong>
+            <br>
+            <i>{{movieRole.roleDescription}}</i>
+          </div></div>
+    </div>
+  </div>
+</div>

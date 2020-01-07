@@ -1,0 +1,55 @@
+<div *ngFor="let movie of activity">
+    <div class="container">
+        <h4 *ngIf="movie.savedMovie">{{movie.savedMovie.name}}
+            <span class="pull-right">Edited By: {{movie.userName}}</span></h4>
+        <table class="table" style="border: 1px; border-style: solid; border-color: grey;">
+            <tr>
+              <th>Changes</th>
+              <th>Current</th>
+              <th>Edited</th>
+            </tr>
+              <tr *ngIf="movie.name">
+                  <th>Title</th>
+                  <td>{{movie.savedMovie?.name}}</td>
+                  <td>{{movie.name}}</td>
+              </tr>
+              <tr *ngIf="movie.plotSummary">
+                  <th>Plot Summary</th>
+                  <td>{{movie.savedMovie?.plotSummary}}</td>
+                  <td>{{movie.plotSummary}}</td>
+              </tr>
+              <tr *ngIf="movie.language">
+                  <th>Language</th>
+                  <td>{{movie.savedMovie?.language}}</td>
+                  <td>{{movie.language}}</td>
+              </tr>
+              <tr *ngIf="movie.genre">
+                  <th>Genre</th>
+                  <td>{{movie.savedMovie?.genre}}</td>
+                  <td>{{movie.genre}}</td>
+              </tr>
+              <tr *ngIf="movie.releaseDate">
+                  <th>Release Date</th>
+                  <td>{{movie.savedMovie?.releaseDate | date:"dd,MMM,yyyy"}}</td>
+                  <td>{{movie.releaseDate | date:"dd,MMM,yyyy"}}</td>
+              </tr>
+              <tr *ngIf="movie.runtime">
+                  <th>Runtime</th>
+                  <td>{{movie.savedMovie?.runtime}}</td>
+                  <td>{{movie.runtime}}</td>
+              </tr>
+              <tr *ngIf="movie.country">
+                  <th>Country</th>
+                  <td>{{movie.savedMovie?.country}}</td>
+                  <td>{{movie.country}}</td>
+              </tr>
+                <tr>
+                  <td><button class="btn btn-primary" (click)="reviewActivity(movie.id, true)">Accept</button></td>
+                  <td><button class="btn btn-danger" (click)="reviewActivity(movie.id, false)">Reject</button></td>
+                </tr>
+          </table>
+      </div>
+</div>
+<div class="d-flex justify-content-center mt-2" *ngIf="activity?.length===0">
+  <h1 >Nothing to review at the moment.</h1>
+</div>

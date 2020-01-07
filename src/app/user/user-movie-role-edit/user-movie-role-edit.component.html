@@ -1,0 +1,26 @@
+<div class="container mt-2" *ngFor="let movieRole of movieRoleActivity; let i = index">
+    <ng-container *ngIf="movieRole.savedRole?.isApproved">
+        <h4>Actor: <a [routerLink]="['/artist/detail']"  [queryParams] ="{id: movieRole.savedRole.artist.id}">
+          {{movieRole.savedRole.artist.firstName}} {{movieRole.savedRole.artist.lastName}}</a>,
+        Movie: <a [routerLink]="['/movie/detail']"  [queryParams] ="{id: movieRole.savedRole.movie.id}" >
+          {{movieRole.savedRole.movie.name}}</a>,
+        Role: {{movieRole.savedRole.roleType.roleName}}</h4>
+      <table class="table" style="border: 1px; border-style: solid; border-color: grey;">
+          <tr>
+            <th>Changes</th>
+            <th *ngIf="!movieRole.isApproved">Current</th>
+            <th>Edited</th>
+          </tr>
+            <tr *ngIf="movieRole">
+                <th>Role Description</th>
+                <td *ngIf="!movieRole.isApproved">{{movieRole.savedRole?.roleDescription}}</td>
+                <td>{{movieRole.roleDescription}}</td>
+            </tr>
+              <tr>
+                <td><button class="btn btn-danger" *ngIf="!movieRole.isApproved" (click)="delete(movieRole.id, i)">Delete</button></td>
+              </tr>
+        </table></ng-container>
+    </div>
+    <div class="container mt-2" *ngIf="movieRoleActivity?.length===0">
+      <h1>You don't have any edits here.</h1>
+    </div>

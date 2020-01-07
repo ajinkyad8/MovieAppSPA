@@ -1,0 +1,89 @@
+<h4>Your Contributions</h4>
+<hr>
+<tabset>
+    <tab heading="Movies" (selectTab)="getUserMovies()" (deselect)="clearMovies()">
+            <tabset>
+                <tab heading="Created" (selectTab)="getUserMovies()" (deselect)="clearMovies()">
+                    <div class="container justify-content-center mt-2">
+                        <div class="btn-group">
+                        <button class="btn btn-primary" (click)="getUserMovies()" [disabled]="!moviesPending">Approved</button>
+                        <button class="btn btn-info" (click)="getUserPendingMovies()" [disabled]="moviesPending">Pending</button>
+                    </div>
+                    </div>
+                    <app-user-movie-list [movies]="movies"></app-user-movie-list>
+                </tab>
+                <tab heading="Edited" (selectTab)="getUserMovieActivity()" (deselect)="clearMovieActivity();">
+                        <div class="container justify-content-center mt-2">
+                            <div class="btn-group">
+                            <button class="btn btn-primary" (click)="getUserMovieActivity()" [disabled]="!movieActivityPending">Approved</button>
+                            <button class="btn btn-info" (click)="getUserPendingMovieActivity()" [disabled]="movieActivityPending">Pending</button>
+                        </div>
+                        </div>
+                        <app-user-movie-edit [movieActivity]="movieActivity"></app-user-movie-edit>
+                </tab>
+                <tab heading="Photos" (selectTab)="getUserMoviePhotos()" (deselect)="clearMoviePhotos()">
+                        <div class="container justify-content-center mt-2">
+                            <div class="btn-group">
+                            <button class="btn btn-primary" (click)="getUserMoviePhotos()" [disabled]="!moviePhotosPending">Approved</button>
+                            <button class="btn btn-info" (click)="getUserPendingMoviePhotos()" [disabled]="moviePhotosPending">Pending</button>
+                        </div>
+                        </div>
+                    <app-user-movie-photo [moviePhotos]="moviePhotos"></app-user-movie-photo>
+                </tab>
+            </tabset>
+    </tab>
+    <tab heading="Arists" (selectTab)="getUserArtists()" (deselect)="clearArtists()">
+        <tabset>
+            <tab heading = "Created">
+            <div class="container justify-content-center mt-2">
+                <div class="btn-group">
+                <button class="btn btn-primary" (click)="getUserArtists()" [disabled]="!artistsPending">Approved</button>
+                <button class="btn btn-info" (click)="getUserPendingArtists()" [disabled]="artistsPending">Pending</button>
+            </div>
+            </div>
+        <app-user-artist-list [artists]="artists"></app-user-artist-list>
+        </tab>
+        <tab heading="Edited" (selectTab)="getUserArtistActivity()" (deselect)="clearArtistActivity()">
+        <div class="container justify-content-center mt-2">
+            <div class="btn-group">
+            <button class="btn btn-primary" (click)="getUserArtistActivity()" [disabled]="!artistActivityPending">Approved</button>
+            <button class="btn btn-info" (click)="getUserPendingArtistActivity()" [disabled]="artistActivityPending">Pending</button>
+        </div>
+        </div>
+        <app-user-artist-edit [artistActivity]="artistActivity"></app-user-artist-edit>
+    </tab>
+    
+    <tab heading="Photos" (selectTab)="getUserArtistPhotos()" (deselect)="clearArtistPhotos()">
+            <div class="container justify-content-center mt-2">
+                <div class="btn-group">
+                <button class="btn btn-primary" (click)="getUserArtistPhotos()" [disabled]="!artistPhotosPending">Approved</button>
+                <button class="btn btn-info" (click)="getUserPendingArtistPhotos()" [disabled]="artistPhotosPending">Pending</button>
+            </div>
+            </div>
+        <app-user-artist-photo [artistPhotos]="artistPhotos"></app-user-artist-photo>
+    </tab>
+        </tabset>
+    </tab>
+    <tab heading="Movie Roles" (selectTab)="getUserMovieRoles()" (deselect)="clearMovieRoles()">
+        <tabset>
+        <tab heading="Created" (selectTab)="getUserMovieRoles()">
+                <div class="container justify-content-center mt-2">
+                    <div class="btn-group">
+                    <button class="btn btn-primary" (click)="getUserMovieRoles()" [disabled]="!movieRolesPending">Approved</button>
+                    <button class="btn btn-info" (click)="getUserPendingMovieRoles()" [disabled]="movieRolesPending">Pending</button>
+                </div>
+                </div>
+            <app-user-movie-role [movieRoles]="movieRoles"></app-user-movie-role>
+        </tab>
+        <tab heading="Edited" (selectTab)="getUserMovieRoleActivity()" (deselect)="clearMovieRoleActivity()">
+                <div class="container justify-content-center mt-2">
+                    <div class="btn-group">
+                    <button class="btn btn-primary" (click)="getUserMovieRoleActivity()" [disabled]="!movieRoleActivityPending">Approved</button>
+                    <button class="btn btn-info" (click)="getUserPendingMovieRoleActivity()" [disabled]="movieRoleActivityPending">Pending</button>
+                </div>
+                </div>
+                <app-user-movie-role-edit [movieRoleActivity]="movieRoleActivity"></app-user-movie-role-edit>
+            </tab>
+        </tabset>
+    </tab>
+</tabset>

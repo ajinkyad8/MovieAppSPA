@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="['/home']">Movie Zone</a>
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/home']">Home</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/movie']">Movies</a>
+      </li>
+      <li class="nav-item"  routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/artist']" >Artists</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAdmin">
+        <a class="nav-link " [routerLink]="['/admin']">Admin</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isModerator">
+        <a class="nav-link " [routerLink]="['/moderator']">Moderator</a>
+      </li>
+    </ul>
+    <div class="btn-group" *ngIf="!loggedIn()">
+      <button class="btn btn-primary mr-2" [routerLink]="['auth/login']" >Login</button>
+      <button class="btn btn-secondary ml-2" [routerLink]="['auth/register']" >Register</button>
+    </div>
+    <div  *ngIf="loggedIn()">
+        <div class="btn-group" dropdown>
+            <a dropdownToggle style="cursor: pointer; right: 0; left: auto;" class="dropdown-toggle text-light">
+              Hi {{user}} <span class="caret"></span>
+        </a>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right">
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/user']" >Your Contributions</a></li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem"><a class="dropdown-item"  style="cursor: pointer;"(click)="logout()">Logout</a>
+              </li>
+            </ul>
+          </div>
+    </div>
+</nav>

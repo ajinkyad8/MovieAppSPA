@@ -1,0 +1,48 @@
+<div class="row" style="display: flex">
+  <div class="col-sm-6" style="flex: 1;">
+<div *ngIf="artistPhotos.length>0" >
+  <carousel >
+  <div *ngFor="let artistPhoto of artistPhotos; let i = index">
+    <slide>
+      <img src="{{artistPhoto.photo.url}}" style="width: 100%;" alt=""
+      [ngClass]="!artistPhoto.photo.isApproved && 'pending-approval'">
+              <div class="text-center img-text" *ngIf="!artistPhoto.photo.isApproved">
+                <h4 class="text-danger">Not Yet Approved</h4>
+              </div>
+      <div class="carousel-caption d-none d-md-block">
+        <div class="btn-group">
+        <button class="btn btn-slide btn-primary" (click)="setDisplayPicture(artistPhoto)" [disabled]="!artistPhoto.photo.isApproved">Set As Display Picture</button>
+        <button class="btn btn-slide btn-danger" (click)="deletePhoto(artistPhoto, i)">Delete</button>
+      </div>
+      </div>
+    </slide>
+  </div>
+  </carousel>
+</div>
+</div>
+<div class="col-sm-6" style="flex: 1;">
+  <h3>Add Photos</h3>
+  <hr>
+  <div class="lds-ring" *ngIf="loading"><div></div><div></div><div></div><div></div></div>
+  <div class="container mt-2" *ngIf="!loading">
+  <div class="uploadfilecontainer text-center" (click)="fileInput.click()" appDragDrop (filesDropped)="addFromDropzone($event)">
+    <input hidden type="file" #fileInput (change)="addFromDropzone($event.target.files)">
+    <i class="fa fa-upload fa-3x"></i><h3>Drag and Drop your Images Here.</h3>
+  </div>
+  <h4>Or choose Images below</h4>
+  <div class="form-group">
+    <input type="file" id="file" accept="image/*" multiple (change)="addFromForm($event.target.files)">
+</div>
+</div>
+<div class="container">
+    <div  class="files-list" *ngFor="let file of files;let i= index">
+        <p style="text-overflow: ellipsis; overflow: hidden "> {{ file.name }} </p>
+        <p style="justify-content: right;">{{file.size/1024/1024 | number: '.2'}}MB</p>
+        <button class="delete-file" (click)="deleteAttachment(i)">
+          <i class="fa fa-trash"></i>
+        </button>
+     </div>
+       <button class="btn btn-success" (click)="uploadPhotos()" [disabled]="files.length===0 || loading">Upload All</button>
+     </div>
+</div>
+</div>

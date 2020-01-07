@@ -1,0 +1,60 @@
+<div class="tab-panel">
+  <tabset>
+    <tab heading="Movies" (selectTab)="getMoviesToReview()">
+      <tabset>
+        <tab heading="New" (selectTab)="getMoviesToReview()">
+          <app-moderator-movie [movies]="movies"></app-moderator-movie>
+        </tab>
+        <tab heading="Edit" (selectTab)="getMovieActivityToReview()">
+          <app-moderator-movie-activity [activity]="movieActivity"></app-moderator-movie-activity>
+        </tab>
+        <tab heading="Photos" (selectTab)="getMoviePhotosToReview()">
+          <app-moderator-movie-photos [moviePhotos]="moviePhotos"></app-moderator-movie-photos>
+        </tab>
+      </tabset>
+    </tab><tab heading="Artist" (selectTab)="getArtistsToReview()">
+        <tabset>
+          <tab heading="New" (selectTab)="getArtistsToReview()">
+            <app-moderator-artist [artists]="artists"></app-moderator-artist>
+          </tab>
+          <tab heading="Edit" (selectTab)="getArtistActivityToReview()">
+            <app-moderator-artist-activity [activity]="artistActivity"></app-moderator-artist-activity>
+          </tab>
+          <tab heading="Photos" (selectTab)="getArtistPhotosToReview()">
+            <app-moderator-artist-photos [artistPhotos]="artistPhotos"></app-moderator-artist-photos>
+          </tab>
+        </tabset>
+      </tab>
+      <tab heading="Movie Roles" (selectTab)="getMovieRolesToReview()"><tabset>
+          <tab heading="New" (selectTab)="getMovieRolesToReview()">
+            <app-moderator-movie-role [movieRoles]="movieRoles"></app-moderator-movie-role>
+          </tab>
+          <tab heading="Edit" (selectTab)="getMovieRoleActivity()">
+            <app-moderator-movie-role-activity [activity]="movieRoleActivity"></app-moderator-movie-role-activity>
+          </tab>
+        </tabset>
+      </tab>
+      <tab heading="Delete" (selectTab)="getMovieDeleteRequests()">
+        <tabset>
+            <tab heading = "Movies" (selectTab)="getMovieDeleteRequests()">
+              <app-moderator-movie-delete [deleteRequests]="movieDeleteRequests"></app-moderator-movie-delete>
+            </tab>
+          <tab heading = "Artists" (selectTab)="getArtistDeleteRequests()">
+            <app-moderator-artist-delete [deleteRequests]="artistDeleteRequests"></app-moderator-artist-delete>
+          </tab>
+          <tab heading = "Movie Roles" (selectTab)="getMovieRoleDeleteRequests()">
+            <app-moderator-movie-role-delete [deleteRequests]="movieRoleDeleteRequests"></app-moderator-movie-role-delete>
+          </tab>
+          <tab heading = "Photos" (selectTab)="getMoviePhotosWithDeleteRequests()">
+              <div class="container justify-content-center mt-2">
+            <div class="btn-group">
+              <button class="btn btn-primary" (click)="getMoviePhotosWithDeleteRequests()">Movies</button>
+              <button class="btn btn-secondary" (click)="getArtistPhotosWithDeleteRequests()">Artists</button>
+            </div>
+            </div>
+            <app-moderator-photo-delete [photosWithDeleteRequests]="photosWithDeleteRequests"></app-moderator-photo-delete>
+          </tab>
+        </tabset>
+      </tab>
+  </tabset>
+</div>

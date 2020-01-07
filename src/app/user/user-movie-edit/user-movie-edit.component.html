@@ -1,0 +1,53 @@
+<div class="container mt-2" *ngFor="let movie of movieActivity; let i = index">
+  <ng-container *ngIf="movie.savedMovie?.isApproved">
+    <h4>{{movie.savedMovie.name}}</h4>
+    <table class="table" style="border: 1px; border-style: solid; border-color: grey;">
+        <tr>
+          <th>Changes</th>
+          <th *ngIf="!movie.isApproved">Current</th>
+          <th>Edited</th>
+        </tr>
+          <tr *ngIf="movie.name">
+              <th>Title</th>
+              <td *ngIf="!movie.isApproved">{{movie.savedMovie?.name}}</td>
+              <td>{{movie.name}}</td>
+          </tr>
+          <tr *ngIf="movie.plotSummary">
+              <th>Plot Summary</th>
+              <td *ngIf="!movie.isApproved">{{movie.savedMovie?.plotSummary}}</td>
+              <td>{{movie.plotSummary}}</td>
+          </tr>
+          <tr *ngIf="movie.language">
+              <th>Language</th>
+              <td *ngIf="!movie.isApproved">{{movie.savedMovie?.language}}</td>
+              <td>{{movie.language}}</td>
+          </tr>
+          <tr *ngIf="movie.genre">
+              <th>Genre</th>
+              <td *ngIf="!movie.isApproved">{{movie.savedMovie?.genre}}</td>
+              <td>{{movie.genre}}</td>
+          </tr>
+          <tr *ngIf="movie.releaseDate">
+              <th>Release Date</th>
+              <td *ngIf="!movie.isApproved">{{movie.savedMovie?.releaseDate | date:"dd,MMM,yyyy"}}</td>
+              <td>{{movie.releaseDate | date:"dd,MMM,yyyy"}}</td>
+          </tr>
+          <tr *ngIf="movie.runtime">
+              <th>Runtime</th>
+              <td *ngIf="!movie.isApproved">{{movie.savedMovie?.runtime}}</td>
+              <td>{{movie.runtime}}</td>
+          </tr>
+          <tr *ngIf="movie.country">
+              <th>Country</th>
+              <td *ngIf="!movie.isApproved">{{movie.savedMovie?.country}}</td>
+              <td>{{movie.country}}</td>
+          </tr>
+            <tr>
+              <td *ngIf="!movie.isApproved"><button class="btn btn-danger" (click)="delete(movie.id, i)">Delete</button></td>
+            </tr>
+      </table>
+        </ng-container>
+  </div>
+  <div class="container mt-2" *ngIf="movieActivity?.length===0">
+    <h1>You don't have any edits here.</h1>
+  </div>

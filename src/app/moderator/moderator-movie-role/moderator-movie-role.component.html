@@ -1,0 +1,25 @@
+<div class="container" *ngIf="movieRoles?.length > 0">
+  <table class="table">
+    <tr>
+      <th>Movie Title</th>
+      <th>Artist Name</th>
+      <th>Role Name</th>
+      <th>Role Description</th>
+      <th>Added by User</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let movieRole of movieRoles; let i = index">
+      <td>{{movieRole.movieName}}</td>
+      <td>{{movieRole.artistName}}</td>
+      <td>{{movieRole.roleName}}</td>
+      <td>{{movieRole.roleDescription}}</td>
+      <td>{{movieRole.userName}}</td>
+      <td><div class="btn-group">
+        <button class="btn btn-primary" (click)="reviewMovieRole(movieRole,true,i)">Accept</button>
+        <button class="btn btn-danger" (click)="reviewMovieRole(movieRole,false,i)">Reject</button></div></td>
+    </tr>
+  </table>
+</div>
+<div class="d-flex justify-content-center mt-2" *ngIf="movieRoles?.length===0">
+  <h1 >Nothing to review at the moment.</h1>
+</div>

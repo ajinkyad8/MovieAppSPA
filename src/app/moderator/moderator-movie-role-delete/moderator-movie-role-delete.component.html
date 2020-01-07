@@ -1,0 +1,30 @@
+<ng-container *ngIf="deleteRequests?.length > 0">
+<div class="container" *ngFor="let request of deleteRequests">
+    <table class="table">
+      <tr>
+        <th>Movie</th>
+        <th>Artist</th>
+        <th>Role</th>
+        <th>User</th>
+        <th>Reason</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td><a [routerLink]="['/movie/detail']"  [queryParams] ="{id: request.movieRole?.movieId}">
+          {{request.movieRole.movieName}}</a></td>
+          <td><a [routerLink]="['/artist/detail']"  [queryParams] ="{id: request.movieRole?.artistId}">
+            {{request.movieRole.artistName}}</a></td>
+            <td>{{request.movieRole.roleName}}</td>
+          <td>{{request.user.userName}}</td>
+          <td>{{request.reason}}</td>
+          <td><div class="btn-group">
+            <button class="btn btn-danger" (click)="review(request.id,true)">Approve</button>
+            <button class="btn btn-primary"(click)="review(request.id,false)">Reject</button>
+          </div></td>
+      </tr>
+    </table>
+  </div>
+</ng-container>
+<div class="d-flex justify-content-center mt-2" *ngIf="deleteRequests?.length===0">
+  <h1 >Nothing to review at the moment.</h1>
+</div>

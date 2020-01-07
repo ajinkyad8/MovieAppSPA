@@ -1,0 +1,46 @@
+.card-deck.card-deck-scroll {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    border: 2px;
+    padding: 20px;
+    border-style: solid;
+}
+
+.card-deck.card-deck-scroll > .card {
+    flex-basis: 35%;
+}
+
+.card {
+    max-height: 150px;
+    max-width: 150px;
+    padding: 1rem;
+}
+
+.pending-approval{
+    opacity: 0.2;
+  }
+  
+  
+  .img-text {
+    position: absolute;
+    bottom: 30%;
+    left: 5%;
+  }
+  
+  .longText {
+      width: 150px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+  }
+  
+  .longText:hover{
+      overflow: visible; 
+      white-space: normal; 
+      width: auto;
+      position: absolute;
+      background-color:#FFF;
+  }
+  .longText:hover+div {
+      margin-top:20px;
+  }

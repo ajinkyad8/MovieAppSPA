@@ -1,0 +1,62 @@
+
+<div class="container mt-3 justify-content-center" style="border: 2px; border-color: black;">
+<h4>Select {{roleType.roleName}}(s)</h4>
+<div class=" card-deck card-deck-scroll" style="height: 300px;">
+    <div class="card">
+      <div class="card-body">
+        <button class="btn btn-primary btn-lg" (click)="artistList.show()">
+          <i class="fa fa-plus-circle fa-lg"></i>
+        </button>
+        <h3 class="card-title">Add</h3>
+      </div>
+    </div>
+    <div class="card card-img-wrapper" *ngFor="let movieRole of movieRolesAdded; let i = index">
+      <img src="{{movieRole?.artist.photoUrl || '../../../assets/artist.png'}}" class="card-img-top" alt="..."  
+        [ngClass]="!movieRole.isApproved && 'pending-approval'">
+        <div class="text-center img-text" *ngIf="!movieRole.isApproved">
+          <h6 class="text-danger">Not Yet Approved</h6>
+        </div>
+        <div class=" member-icons animate text-center">
+        <button class="btn btn-primary mr-2" (click)="edit(movieRole)">
+          <i class="fa fa-pencil"></i></button>
+          <button class="btn btn-danger" (click)="delete(movieRole, i)">
+            <i class="fa fa-trash"></i></button>
+        </div>
+          <div class="card-body" style="width: max-content; padding-left: 0%;">
+            <div class="longText">
+          <strong class="card-title">{{ movieRole.artist.firstName }}</strong> <br> <strong>{{ movieRole.artist.lastName }}</strong>
+          <br><i>{{movieRole.roleDescription}}</i></div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div bsModal #artistList="bs-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-lg modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Select {{roleType.roleName}}</h4>
+        <input type="text" class="form-control ml-2" [(ngModel)]="search" (ngModelChange)="getArtists()" placeholder="Search" style="width: 300px;">
+        <button class="btn btn-primary ml-3" style="cursor:auto"> <a [routerLink]="['/artist/edit']" target="_blank" style="color: white;">New</a></button>
+        <button type="button" class="close pull-right"(click)="artistList.hide()"><i class="fa fa-close"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow-y: auto; height: 500px;">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 mb-3" *ngFor="let artist of artists">
+            <app-movie-artist-card [artist]="artist" [roleType]="roleType" [movie]="movie"></app-movie-artist-card>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+            <pagination [boundaryLinks]="true" [(ngModel)]="pageNumber" [totalItems]="totalItems" [itemsPerPage]="pageSize"
+            (pageChanged)="pageChanged($event)"></pagination>
+          </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="artistList.hide()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

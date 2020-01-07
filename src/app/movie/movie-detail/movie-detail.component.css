@@ -1,0 +1,19 @@
+table {
+    border: 2px;
+    border-style: solid;
+}
+th {
+    width: 200px;
+    border: 2px;
+    border-style: solid;
+}
+.pending-approval{
+    opacity: 0.2;
+  }
+  
+  
+  .img-text {
+    position: absolute;
+    bottom: 40%;
+    left: 25%;
+  }

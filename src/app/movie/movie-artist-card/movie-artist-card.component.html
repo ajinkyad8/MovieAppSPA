@@ -1,0 +1,46 @@
+<div class="card mx-2" style="width: 150px; ">
+  <div class="card-img-wrapper">
+    <img src="{{artist.photoUrl || '.../../../../../assets/artist.png'}}" class="card-img-top img-responsive" alt="..."
+      [ngClass]="!artist.isApproved && 'pending-approval'">
+    <div class="text-center img-text" *ngIf="!artist.isApproved">
+      <h6 class="text-danger">Not Yet Approved</h6>
+    </div>
+    <button class="btn btn-primary member-icons animate" (click)="openModal(template)">
+      <i class="fa fa-plus-circle fa-lg"></i>
+    </button>
+  </div>
+  <div class="card-body p-1">
+    <p>
+      {{artist.firstName}} {{artist.lastName}}
+    </p>
+  </div>
+</div>
+
+<ng-template #template class="modal-dialog modal-lg">
+  <div class="modal-header">
+    <h4>
+      {{artist.firstName}} {{artist.lastName}}
+    </h4>
+    <button type="button" class="close pull-right" (click)="modalRef.hide()"><i class="fa fa-close"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card mx-2" style="width: 300px; ">
+      <div class="card-img-wrapper">
+        <img src="{{artist.photoUrl || '.../../../../../assets/artist.png'}}" class="card-img-top img-responsive"
+          alt="..." />
+      </div>
+      <div class="card-body p-1">
+        <div class="form-group">
+          <textarea type="text" class="form-control" [(ngModel)]="roleDescription" style="height:120px"
+            placeholder="(Optional)Enter the role description, like the character's name for an actor, &quot;co-director&quot; in case of multiple directors, etc">
+                           </textarea>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-success" (click)="addArtist()">Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
