@@ -48,6 +48,8 @@ Open <i>localhost:4200</i> on your web broswer to access the application.
 
 ### 5) Add some role types and get started.
 Login as <b>Admin</b>. Click on the Admin option on the navbar. Select <b>Movie Role Types</b>, click on <b>Add</b> and add some role types to get started.
+![Adding Movie Role Types](https://res.cloudinary.com/dmgnm5hrx/image/upload/v1578462459/Screenshot_2_qw7pqn.png)
+
 
 You can add <b>Actor</b> as a role type for starters. Add some movies and artists with their photos, add some movie roles and explore the admin and moderator panels to see all the features of the application.
 
