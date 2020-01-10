@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-4">
         <div>
-            <alert [type]="alert.type" *ngIf="isOpen" [isOpen]="true" [dismissOnTimeout]="5000" (onClose)="isOpen = false">
+            <alert [type]="alert.type" *ngIf="isOpen" [isOpen]="true" [dismissible]="true" [dismissOnTimeout]="5000" (onClose)="isOpen = false">
               <span [innerHtml]="alert.message"></span></alert>
           </div>        
     </div>

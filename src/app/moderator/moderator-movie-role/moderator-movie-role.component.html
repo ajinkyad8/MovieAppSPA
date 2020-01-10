@@ -5,7 +5,7 @@
       <th>Artist Name</th>
       <th>Role Name</th>
       <th>Role Description</th>
-      <th>Added by User</th>
+      <th>Added by</th>
       <th></th>
     </tr>
     <tr *ngFor="let movieRole of movieRoles; let i = index">
@@ -20,6 +20,9 @@
     </tr>
   </table>
 </div>
-<div class="d-flex justify-content-center mt-2" *ngIf="movieRoles?.length===0">
+<div class="container justify-content-center mt-2" *ngIf="movieRoles?.length===0">
   <h1 >Nothing to review at the moment.</h1>
+  <br>
+  <br>
+  <h3>(Movie Role requests will apear only if both the movie and the artist are approved.)</h3>
 </div>

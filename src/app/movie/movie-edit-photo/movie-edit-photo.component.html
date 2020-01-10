@@ -19,6 +19,9 @@
     </div>
     </carousel>
   </div>
+  <div *ngIf="moviePhotos.length===0" class="d-flex justify-content-center mt-2">
+    <h1>No Photos Added</h1>
+  </div>
   </div>
   <div class="col-sm-6" style="flex: 1;">
     <h3>Add Photos</h3>

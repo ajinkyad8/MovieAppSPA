@@ -8,12 +8,13 @@
       <th>Release Date</th>
       <th>Runtime</th>
       <th>Country</th>
-      <th>Added by User</th>
+      <th>Added by</th>
       <th></th>
     </tr>
     <tr *ngFor="let movie of movies;">
       <td>{{movie.name}}</td>
-      <td>{{movie.plotSummary}}</td>
+      <td >
+        <div style="max-height: 150px !important;overflow-y: auto;">{{movie.plotSummary}}</div></td>
       <td>{{movie.language}}</td>
       <td>{{movie.genre}}</td>
       <td>{{movie.releaseDate | date:"dd,MMM,yyyy"}}</td>
